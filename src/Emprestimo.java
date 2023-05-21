@@ -2,29 +2,28 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class emprestimo {
+public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
-    private usuario usuario;
-    private List<livro> livrosEmprestados;
+    private Usuario usuario;
+    private List<Livro> livrosEmprestados;
 
-    public emprestimo(LocalDate dataEmprestimo, LocalDate dataDevolucao, usuario usuario) {
+    public Emprestimo(LocalDate dataEmprestimo, LocalDate dataDevolucao, Usuario usuario) {
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.usuario = usuario;
         this.livrosEmprestados = new ArrayList<>();
     }
 
-    public void adicionarLivro(livro livro) {
+    public void adicionarLivro(Livro livro) {
         livrosEmprestados.add(livro);
     }
 
-    public void removerLivro(livro livro) {
+    public void removerLivro(Livro livro) {
         livrosEmprestados.remove(livro);
     }
 
-    public boolean verificarLivro(livro livro) {
+    public boolean verificarLivro(Livro livro) {
         return livrosEmprestados.contains(livro);
     }
 
@@ -32,7 +31,7 @@ public class emprestimo {
         StringBuilder descricao = new StringBuilder();
         descricao.append("Usuário: ").append(usuario.getNome()).append(" (").append(usuario.getEmail()).append(")\n");
         descricao.append("Livros:\n");
-        for (livro livro : livrosEmprestados) {
+        for (Livro livro : livrosEmprestados) {
             descricao.append(livro.getTitulo()).append("\n");
             descricao.append(livro.getAutor()).append("\n");
             descricao.append(livro.getUnidadesDisponiveis()).append(" unidades disponíveis.\n");
@@ -56,19 +55,27 @@ public class emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public List<livro> getLivrosEmprestados() {
+    public List<Livro> getLivrosEmprestados() {
         return livrosEmprestados;
     }
 
-    public void setLivrosEmprestados(List<livro> livrosEmprestados) {
+    public void setLivrosEmprestados(List<Livro> livrosEmprestados) {
         this.livrosEmprestados = livrosEmprestados;
+    }
+
+    public String getInformacoesEmprestimo() {
+        StringBuilder informacoes = new StringBuilder();
+        informacoes.append("Usuário: ").append(usuario.getNome()).append("\n");
+        informacoes.append("Data do Empréstimo: ").append(dataEmprestimo.toString()).append("\n");
+        informacoes.append("Data de Devolução: ").append(dataDevolucao.toString()).append("\n");
+        return informacoes.toString();
     }
 }

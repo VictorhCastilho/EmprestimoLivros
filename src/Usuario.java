@@ -1,15 +1,11 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-public abstract class usuario {
+public abstract class Usuario {
     private static int proximaMatricula = 1;
     private int matricula;
     private String nome;
     private String email;
     private String genero;
 
-    public usuario(String nome, String email, String genero) {
+    public Usuario(String nome, String email, String genero) {
         this.matricula = proximaMatricula++;
         this.nome = nome;
         this.email = email;
@@ -35,5 +31,7 @@ public abstract class usuario {
     public void setGenero(String genero) {
         this.genero = genero;
     }
+
+    public abstract String getDescricaoUsuario();
 
 }
