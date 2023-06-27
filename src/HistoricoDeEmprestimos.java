@@ -2,29 +2,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoricoDeEmprestimos {
-    private List<Emprestimo> emprestimosRealizados;
+    private ListaGenerica<Emprestimo> emprestimosRealizados;
 
     public HistoricoDeEmprestimos() {
-        this.emprestimosRealizados = new ArrayList<>();
+        emprestimosRealizados = new ListaGenerica<>();
     }
 
     public void adicionarEmprestimo(Emprestimo emprestimo) {
-        emprestimosRealizados.add(emprestimo);
+        emprestimosRealizados.adicionar(emprestimo);
     }
 
     public void removerEmprestimo(Emprestimo emprestimo) {
-        emprestimosRealizados.remove(emprestimo);
+        emprestimosRealizados.remover(emprestimo);
     }
 
     public boolean verificarEmprestimo(Emprestimo emprestimo) {
-        return emprestimosRealizados.contains(emprestimo);
+        return emprestimosRealizados.verificar(emprestimo);
     }
 
     public List<Emprestimo> getEmprestimosRealizados() {
-        return emprestimosRealizados;
+        return emprestimosRealizados.getLista();
     }
 
     public void setEmprestimosRealizados(List<Emprestimo> emprestimosRealizados) {
-        this.emprestimosRealizados = emprestimosRealizados;
+        this.emprestimosRealizados.setLista(emprestimosRealizados);
     }
 }

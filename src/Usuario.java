@@ -12,6 +12,10 @@ public abstract class Usuario {
         this.genero = genero;
     }
 
+    public String getDescricao() {
+        return "Usuário: " + getDescricaoUsuario() + " " + getNome() + " (" + getEmail() + ")";
+    }
+
     public int getMatricula() {
         return matricula;
     }
@@ -33,5 +37,4 @@ public abstract class Usuario {
     }
 
     public abstract String getDescricaoUsuario();
-
 }

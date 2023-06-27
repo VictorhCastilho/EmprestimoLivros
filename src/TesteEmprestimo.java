@@ -11,11 +11,21 @@ public class TesteEmprestimo {
 
         Livro livro1 = new Livro("As Aventuras de Jobercleison", "Jobercleison", 3);
         Livro livro2 = new Livro("Pneu Assassino", "Flavin do Pneu", 5);
-        emprestimo.adicionarLivro(livro1);
-        emprestimo.adicionarLivro(livro2);
+        try {
+            emprestimo.emprestimoDeLivro(livro1);
+        } catch (LivroNaoDisponivelException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            emprestimo.emprestimoDeLivro(livro2);
+        } catch (LivroNaoDisponivelException e) {
+            throw new RuntimeException(e);
+        }
 
         String descricaoUsuario = IdentificadorDeUsuario.identificarUsuario(aluno);
         System.out.println("Tipo de usuário: " + descricaoUsuario);
+
+        System.out.println("Curso: " + aluno.getCurso());
 
         System.out.println("Informações do Empréstimo:");
         System.out.println(emprestimo.getInformacoesEmprestimo());
