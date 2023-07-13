@@ -7,7 +7,8 @@ public class Professor extends Usuario {
     }
 
     public String getDepartamento() {
-        return departamento;
+        String str = this.departamento;
+        return str;
     }
 
     @Override
@@ -17,5 +18,10 @@ public class Professor extends Usuario {
         } else {
             return "Professor";
         }
+    }
+
+    @Override
+    public double getValorMultaPorDia() {
+        return 0;
     }
 }

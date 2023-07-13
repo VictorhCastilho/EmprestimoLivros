@@ -19,7 +19,8 @@ public class Livro {
     }
 
     public String getTitulo() {
-        return titulo;
+        String str = this.titulo;
+        return str;
     }
 
     public void setTitulo(String titulo) {
@@ -27,7 +28,8 @@ public class Livro {
     }
 
     public String getAutor() {
-        return autor;
+        String str = this.autor;
+        return str;
     }
 
     public void setAutor(String autor) {
@@ -64,6 +66,12 @@ public class Livro {
         }
         return usuariosEmprestimo.get(0);
     }
+
+    public void setUsuario(Usuario usuario) {
+        usuariosEmprestimo.clear(); // Remover todos os usuários anteriores (apenas 1 usuário por livro)
+        usuariosEmprestimo.add(usuario); // Adicionar o novo usuário
+    }
+
 
     public String getDescricaoUsuariosEmprestimo() {
         StringBuilder descricao = new StringBuilder("Usuários que emprestaram o livro ").append(titulo).append(":\n");

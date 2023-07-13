@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class HistoricoDeEmprestimos {
@@ -21,7 +20,8 @@ public class HistoricoDeEmprestimos {
     }
 
     public List<Emprestimo> getEmprestimosRealizados() {
-        return emprestimosRealizados.getLista();
+        List<Emprestimo> list = this.emprestimosRealizados.getLista();
+        return list;
     }
 
     public void setEmprestimosRealizados(List<Emprestimo> emprestimosRealizados) {

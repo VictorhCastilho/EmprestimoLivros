@@ -12,7 +12,7 @@ public abstract class Usuario {
         this.genero = genero;
     }
 
-    public String getDescricao() {
+    public String getDecriçãoDoUsuario() {
         return "Usuário: " + getDescricaoUsuario() + " " + getNome() + " (" + getEmail() + ")";
     }
 
@@ -21,15 +21,18 @@ public abstract class Usuario {
     }
 
     public String getNome() {
-        return nome;
+        String str = this.nome;
+        return str;
     }
 
     public String getEmail() {
-        return email;
+        String str = this.email;
+        return str;
     }
 
     public String getGenero() {
-        return genero;
+        String str = this.genero;
+        return str;
     }
 
     public void setGenero(String genero) {
@@ -37,4 +40,6 @@ public abstract class Usuario {
     }
 
     public abstract String getDescricaoUsuario();
+
+    public abstract double getValorMultaPorDia();
 }

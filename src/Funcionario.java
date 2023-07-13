@@ -7,7 +7,8 @@ public class Funcionario extends Usuario {
     }
 
     public String getDepartamento() {
-        return departamento;
+        String str = departamento;
+        return str;
     }
 
     @Override
@@ -17,5 +18,10 @@ public class Funcionario extends Usuario {
         } else {
             return "Funcionário";
         }
+    }
+
+    @Override
+    public double getValorMultaPorDia() {
+        return 1.0; // Valor da multa por dia para funcionário
     }
 }

@@ -31,21 +31,21 @@ public class Emprestimo {
     }
 
     public void devoluçãoDeLivro(Livro livro) {
-        livrosEmprestados.remove(livro);
+        livrosEmprestados.remove(livro);             //  Remove um livro da lista de livros emprestados
         livro.removerUsuarioEmprestimo(usuario);
     }
 
-    public void verificarDevolucaoAtrasada(Livro livro) {
+    public void verificarDevolucaoAtrasada(Livro livro) {     // Verifica se a devolução foi atrasada e aplica multa
         LocalDate dataAtual = LocalDate.now();
         if (dataAtual.isAfter(dataDevolucao)) {
             long diasAtraso = ChronoUnit.DAYS.between(dataDevolucao, dataAtual);
-            double valorMultaPorDia = 7.0; // Valor da multa por dia de atraso para usuários normais
+            double valorMultaPorDia = usuario.getValorMultaPorDia();
             double valorMulta = valorMultaPorDia * diasAtraso;
-            String formaTratamento = usuario.getGenero().equals("M") ? "Sr." : "Sra.";
+            String formaTratamento = usuario.getGenero().equals("Masculino") ? "Sr." : "Sra.";
             StringBuilder mensagem = new StringBuilder();
             mensagem.append(formaTratamento).append(" ").append(usuario.getNome()).append(",\n");
 
-            if (usuario instanceof Professor) {
+            if (usuario instanceof Professor) {    // Caso seja um professor, não tem uma multa, só um aviso
                 mensagem.append("Dê um bom exemplo aos seus alunos, devolva os seguintes livros em atraso:\n");
             } else {
                 mensagem.append("Segue a lista de livros com devolução em atraso:\n");
@@ -65,26 +65,27 @@ public class Emprestimo {
         return livrosEmprestados.contains(livro);
     }
 
-    public List<Livro> getLivrosEmprestadosCrescente() {
+    public List<Livro> getLivrosEmprestadosOrdemAlfabetica() {    //Disponibilizar uma listagem de livros emprestados em ordem crescente por título do livro.
         List<Livro> livrosOrdenados = new ArrayList<>(livrosEmprestados);
         Collections.sort(livrosOrdenados, Comparator.comparing(Livro::getTitulo));
         return livrosOrdenados;
     }
 
-    public List<Livro> getLivrosNomeUsuarioDecrescente() {
-        List<Livro> livrosEmprestadosOrdenados = new ArrayList<>(livrosEmprestados);
-        Collections.sort(livrosEmprestadosOrdenados, new Comparator<Livro>() {
-            @Override
-            public int compare(Livro livro1, Livro livro2) {
-                String nomeUsuario1 = livro1.getUsuario().getNome();
-                String nomeUsuario2 = livro2.getUsuario().getNome();
-                return nomeUsuario2.compareTo(nomeUsuario1);
-            }
-        });
-        return livrosEmprestadosOrdenados;
+    public List<Livro> getListaUsuarioOrdemAlfabetica() { //Disponibiliza uma listagem de livros emprestados em ordem decrescente pelo nome do usuário.
+        List<Livro> livrosOrdenados = new ArrayList<>(livrosEmprestados);
+        livrosOrdenados.sort(Comparator.comparing(livro -> livro.getUsuario().getNome()));
+        return livrosOrdenados;
     }
 
-    public String getDescricao() {
+    public String getInformacoesEmprestimo() {
+        StringBuilder informacoes = new StringBuilder();
+        informacoes.append("Usuário: ").append(usuario.getNome()).append("\n");
+        informacoes.append("Data do Empréstimo: ").append(dataEmprestimo.toString()).append("\n");
+        informacoes.append("Data de Devolução: ").append(dataDevolucao.toString()).append("\n");
+        return informacoes.toString();
+    }
+
+    public String getInformacaoDeLivroDeUsuario() {  //Pega informações de Emprestimos de certo usuário
         StringBuilder descricao = new StringBuilder();
         descricao.append("Usuário: ").append(usuario.getNome()).append(" (").append(usuario.getEmail()).append(")\n");
         descricao.append("Livros:\n");
@@ -97,7 +98,8 @@ public class Emprestimo {
     }
 
     public LocalDate getDataEmprestimo() {
-        return dataEmprestimo;
+        LocalDate data = this.dataEmprestimo;
+        return data;
     }
 
     public void setDataEmprestimo(LocalDate dataEmprestimo) {
@@ -105,7 +107,8 @@ public class Emprestimo {
     }
 
     public LocalDate getDataDevolucao() {
-        return dataDevolucao;
+        LocalDate data = this.dataDevolucao;
+        return data;
     }
 
     public void setDataDevolucao(LocalDate dataDevolucao) {
@@ -113,7 +116,8 @@ public class Emprestimo {
     }
 
     public Usuario getUsuario() {
-        return usuario;
+        Usuario usu = this.usuario;
+        return usu;
     }
 
     public void setUsuario(Usuario usuario) {
@@ -128,11 +132,4 @@ public class Emprestimo {
         this.livrosEmprestados = livrosEmprestados;
     }
 
-    public String getInformacoesEmprestimo() {
-        StringBuilder informacoes = new StringBuilder();
-        informacoes.append("Usuário: ").append(usuario.getNome()).append("\n");
-        informacoes.append("Data do Empréstimo: ").append(dataEmprestimo.toString()).append("\n");
-        informacoes.append("Data de Devolução: ").append(dataDevolucao.toString()).append("\n");
-        return informacoes.toString();
-    }
 }

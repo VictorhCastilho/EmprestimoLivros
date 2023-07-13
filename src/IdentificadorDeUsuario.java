@@ -1,7 +1,7 @@
 public class IdentificadorDeUsuario {
 
     public static String identificarUsuario(Usuario usuario) {
-
-            return usuario.getDescricaoUsuario();
+            String str = usuario.getDecriçãoDoUsuario();
+            return str;
     }
 }

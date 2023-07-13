@@ -7,15 +7,22 @@ public class Aluno extends Usuario {
     }
 
     public String getCurso() {
-        return curso;
+        String str = this.curso;
+        return str;
     }
 
     @Override
+
     public String getDescricaoUsuario() {
         if (getGenero().equalsIgnoreCase("feminino")) {
             return "Aluna";
         } else {
             return "Aluno";
         }
+    }
+
+    @Override
+    public double getValorMultaPorDia() {
+        return 2.0; // Valor da multa por dia para Aluno
     }
 }
